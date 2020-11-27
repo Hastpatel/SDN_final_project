@@ -15,11 +15,15 @@ interface1 = ['int fa0/0', 'ip address 10.0.0.1 255.255.255.0', 'no shut']
 loopback1 = ['int lo1', 'ip address 1.1.1.1 255.255.255.0', 'no shut']
 interface2 = ['int fa0/0', 'ip address 10.0.0.2 255.255.255.0', 'no shut']
 loopback2 = ['int lo1', 'ip address 2.2.2.2 255.255.255.0', 'no shut']
+mini1 = ['int fa1/1', 'ip address 10.20.50.1 255.255.255.0', 'no shut']
+sdn2 = ['int fa1/1', 'ip address 10.20.30.1 255.255.255.0', 'no shut']
+
 
 routers = [user1, user2]
 iface = [interface1, interface2]
 loop = [loopback1, loopback2]
-
+other = [mini1, sdn2]
+h=['R1', 'R2']
 
 def get_ips():
     interfaces = {'R1': {}, 'R2': {}}
@@ -28,14 +32,14 @@ def get_ips():
         conn.enable()
         conn.send_config_set(iface[i])
         conn.send_config_set(loop[i])
+        conn.send_config_set(other[i])
         out = conn.send_command('sh ip int brief')
         out = out.split('\n')
         conn.disconnect()
-        for k in interfaces:
-            for j in range(len(out)):
-                a = out[j].split()
-                if a[4] == 'up':
-                    interfaces[k][a[0]] = a[1]
+        for j in range(len(out)):
+            a = out[j].split()
+            if a[4] == 'up':
+                interfaces[h[i]][a[0]] = a[1]
     return interfaces
 
 

@@ -10,8 +10,8 @@ except Exception as e:
 user1 = {'device_type': 'cisco_ios', 'password': 'lab123', 'username': 'lab', 'host': '192.168.100.1', 'secret': 'lab123'}
 user2 = {'device_type': 'cisco_ios', 'password': 'lab123', 'username': 'lab', 'host': '192.168.100.2', 'secret': 'lab123'}
 
-ospf1 = ['router ospf 1', 'network 1.1.1.1 0.0.0.255 area 0', 'network 10.0.0.1 0.0.0.255 area 0']
-ospf2 = ['router ospf 1', 'network 2.2.2.2 0.0.0.255 area 0', 'network 10.0.0.2 0.0.0.255 area 0']
+ospf1 = ['router ospf 1', 'network 1.1.1.1 0.0.0.255 area 0', 'network 10.0.0.1 0.0.0.255 area 0', 'network 10.20.50.1 0.0.0.255 area 0']
+ospf2 = ['router ospf 1', 'network 2.2.2.2 0.0.0.255 area 0', 'network 10.0.0.2 0.0.0.255 area 0', 'network 10.20.30.1 0.0.0.255 area 0']
 
 routers = [user1, user2]
 ospf = [ospf1, ospf2]
