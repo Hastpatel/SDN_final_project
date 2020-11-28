@@ -13,6 +13,21 @@ user = {'device_type': 'linux',
    'username': 'mininet',
     'secret':'mininet'}
 # print(user)
+user_sdn = {'device_type': 'linux',
+   'ip': '192.168.56.108',
+   'password': 'sdn',
+   'username': 'sdn',
+    'secret':'sdn'}
+
+def sdn_controller():
+    sdn_conn = netmiko.ConnectHandler(**user_sdn)
+    sdn_conn.enable()
+    sdn = 'ryu-manager ryu/ryu/app/simple_switch_13.py'
+    ryu_controller = sdn_conn.send_command_timing(sdn)
+    if 'Password:' in ryu_controller:
+        ryu_controller += sdn_conn.send_command_timing('sdn')
+    print(ryu_controller)
+    return
 
 connect_main = netmiko.ConnectHandler(**user)
 connect_main.enable()
@@ -48,7 +63,9 @@ def controller_connectivity():
 
 
 if __name__=='__main__':
+   sdn_controller()
    mininet_init()
    controller_config()
    controller_connectivity()
    #pingall()
+
