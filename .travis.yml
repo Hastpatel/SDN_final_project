@@ -4,4 +4,7 @@ python:
 install:
     - pip install netmiko
 script:
-    - pytest
+    - interface_config.py
+    - routing_config.py
+    - ping_test.py
+    - mininet_config.py
