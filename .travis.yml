@@ -1,1 +1,10 @@
 language: python
+python:
+    - "3.8"
+install:
+    - pip install netmiko
+    - pip install json
+    - pip install time
+    - pip install regex
+script:
+    - pytest
